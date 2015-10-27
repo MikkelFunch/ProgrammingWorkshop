@@ -4,9 +4,7 @@ import static com.mma.searchengine.util.URLUtil.isURL;
 import static com.mma.searchengine.util.URLUtil.removeUrlPrefix;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 public class WordList {
 	
@@ -21,6 +19,18 @@ public class WordList {
 	public WordList(String line, String url) {
 		this.line = line;
 		addUrl(url);
+	}
+	
+	public URLList getUrls() {
+		return urls;
+	}
+	
+	public String getLine() {
+		return line;
+	}
+	
+	public WordList getNext() {
+		return next;
 	}
 	
 	public void setNext(WordList next) {
@@ -60,6 +70,12 @@ public class WordList {
 		}
 	}
 	
+	/**
+	 * Will construct a WordList from the given reader.
+	 * @param fileReader The reader providing the lines to parse
+	 * @return A linked list with all words and URLs
+	 * @throws IOException
+	 */
 	public static WordList construct(BufferedReader fileReader) throws IOException {
 		String currentLine, currentUrl;
 		WordList rootList;
@@ -76,52 +92,16 @@ public class WordList {
 		currentLine = fileReader.readLine();
 		rootList = new WordList(currentLine, currentUrl);
 		
-		do {
-			currentLine = fileReader.readLine();
+		currentLine = fileReader.readLine();
+		while(currentLine != null) {
 			if(isURL(currentLine)) {
 				currentUrl = removeUrlPrefix(currentLine);
 			} else {
 				rootList.addLine(currentLine, currentUrl);
 			}
-		} while(currentLine != null);
+			currentLine = fileReader.readLine();
+		}
 		
 		return rootList;
 	}
-	
-	
-	
-	public static void main(String[] args) throws IOException {
-		BufferedReader fileReader = new BufferedReader (new FileReader (args[0]));
-		WordList wordList = WordList.construct(fileReader);
-		fileReader.close();
-		
-		// Start reading input from the user
-        BufferedReader userInput = new BufferedReader (new InputStreamReader (System.in));
-        
-        System.out.println ("Hit return to exit.");
-        
-        String word;
-        while(true) {
-        	System.out.print("Search for: ");
-        	word = userInput.readLine();
-        	
-        	if (word == null || word.length() == 0) {
-                return; // If the user only pressed enter then exit the method (and program)
-            }
-        }
-	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

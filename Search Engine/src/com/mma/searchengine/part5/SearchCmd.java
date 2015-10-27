@@ -82,18 +82,18 @@ class Searcher {
 		
     	boolean found = false;
     	
-    	while(l != null) {
-    		// Check if the word is a URL and contains the word that is searched for
-    		if(l.str.startsWith(urlPrefix) && l.str.contains(word)) {
-    			System.out.println(l.str.substring(urlPrefix.length()));
-    			found = true;
-    		} else if (l.str.equals(word)) {
-    			System.out.println("The word \""+word+"\" has been found.");
-    			found = true;
-    			break;
-    		}
-    		l = l.next;
-    	}
+//    	while(l != null) {
+//    		// Check if the word is a URL and contains the word that is searched for
+//    		if(l.str.startsWith(urlPrefix) && l.str.contains(word)) {
+//    			System.out.println(l.str.substring(urlPrefix.length()));
+//    			found = true;
+//    		} else if (l.str.equals(word)) {
+//    			System.out.println("The word \""+word+"\" has been found.");
+//    			found = true;
+//    			break;
+//    		}
+//    		l = l.next;
+//    	}
     	if(!found) {
     		System.out.println("The word \""+word+"\" has NOT been found.");
     	}
