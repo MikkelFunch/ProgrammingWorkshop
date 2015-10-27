@@ -4,8 +4,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
 
 // A (item of a) linked list of strings.
 class HTMLlist {    
@@ -43,20 +41,24 @@ class Searcher {
         return false;
     }
     
-    public static List<String> existsMultiple(HTMLlist l, String word) {
-    	List<String> matches = new ArrayList<String>();
+    public static void search(HTMLlist l, String word) {
+    	boolean found = false;
     	
     	while(l != null) {
     		// Check if the word is a URL and contains the word that is searched for
     		if(l.str.startsWith(urlPrefix) && l.str.contains(word)) {
-    			matches.add(l.str.substring(urlPrefix.length()));
+    			System.out.println(l.str.substring(urlPrefix.length()));
+    			found = true;
     		} else if (l.str.equals(word)) {
-    			matches.add(l.str);
+    			System.out.println("The word \""+word+"\" has been found.");
+    			found = true;
+    			break;
     		}
     		l = l.next;
     	}
-    	
-    	return matches;
+    	if(!found) {
+    		System.out.println("The word \""+word+"\" has NOT been found.");
+    	}
     }
 
     // Creates a HTMLlist from a file.
@@ -110,20 +112,7 @@ public class SearchCmd {
             if (name == null || name.length() == 0) {
                 return; // If the user only pressed enter then exit the method (and program)
             }
-            List<String> matches = Searcher.existsMultiple(l, name);
-            if(matches.size() > 0) {
-            	System.out.println ("The word \""+name+"\" has been found.");
-            	for(String s : matches) {
-            		System.out.println(s);
-            	}
-            } else {
-            	System.out.println ("The word \""+name+"\" has NOT been found.");
-            }
-//            else if (Searcher.exists (l, name)) {
-//                System.out.println ("The word \""+name+"\" has been found.");
-//            } else {
-//            	System.out.println ("The word \""+name+"\" has NOT been found.");
-//            }
+            Searcher.search(l, name);
         }
     }
 }
