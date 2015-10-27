@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import static com.mma.searchengine.util.URLUtil.*;
 
 // A (item of a) linked list of strings.
 class HTMLlist {    
@@ -43,16 +44,23 @@ class Searcher {
     
     public static void search(HTMLlist l, String word) {
     	boolean found = false;
+    	boolean currentUrlPrinted = false;
+    	String currentUrl = null;
     	
     	while(l != null) {
-    		// Check if the word is a URL and contains the word that is searched for
-    		if(l.str.startsWith(urlPrefix) && l.str.contains(word)) {
-    			System.out.println(l.str.substring(urlPrefix.length()));
-    			found = true;
+    		// Check if the word is a URL
+    		if(isURL(l.str)) {
+    			currentUrl = removeUrlPrefix(l.str);
+    			currentUrlPrinted = false;
     		} else if (l.str.equals(word)) {
-    			System.out.println("The word \""+word+"\" has been found.");
+    			if(!found) {
+    				System.out.println("The word \""+word+"\" has been found in the following link(s):");
+    			}
+    			if(!currentUrlPrinted) {
+    				System.out.println(currentUrl);
+    				currentUrlPrinted = true;
+    			}
     			found = true;
-    			break;
     		}
     		l = l.next;
     	}
@@ -83,6 +91,15 @@ class Searcher {
 
         return start;   // Return the first item in the list
     }
+    
+    /**
+	 * Checks if the given line is a URL
+	 * @param line The line to check
+	 * @return true if the line is an URL otherwise false
+	 */
+	public static boolean isURL(String line) {
+		return line.startsWith(urlPrefix);
+	}
 }
 
 public class SearchCmd {
