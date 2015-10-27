@@ -1,6 +1,11 @@
 package com.mma.searchengine;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 // A (item of a) linked list of strings.
 class HTMLlist {    
@@ -18,6 +23,8 @@ class HTMLlist {
 // Methods are static, meaning that the class does not need to be instantiated
 // for them to be used.
 class Searcher {
+	
+	private static final String urlPrefix = "*PAGE:";
 
     // Checks if the string words occurs in HTMLlist l.
     // Recall that l represents a single item of the linked list, but points to
@@ -34,6 +41,22 @@ class Searcher {
         // list without encountering the word, therefore it does not  exist and 
         // we can return false.
         return false;
+    }
+    
+    public static List<String> existsMultiple(HTMLlist l, String word) {
+    	List<String> matches = new ArrayList<String>();
+    	
+    	while(l != null) {
+    		// Check if the word is a URL and contains the word that is searched for
+    		if(l.str.startsWith(urlPrefix) && l.str.contains(word)) {
+    			matches.add(l.str.substring(urlPrefix.length()));
+    		} else if (l.str.equals(word)) {
+    			matches.add(l.str);
+    		}
+    		l = l.next;
+    	}
+    	
+    	return matches;
     }
 
     // Creates a HTMLlist from a file.
@@ -61,7 +84,9 @@ class Searcher {
 }
 
 public class SearchCmd {
-
+	
+	
+	
     public static void main (String[] args) throws IOException {
         String name;
 
@@ -84,11 +109,21 @@ public class SearchCmd {
             name = inuser.readLine(); // Read a line from the terminal
             if (name == null || name.length() == 0) {
                 return; // If the user only pressed enter then exit the method (and program)
-            } else if (Searcher.exists (l, name)) {
-                System.out.println ("The word \""+name+"\" has been found.");
-            } else {
-                System.out.println ("The word \""+name+"\" has NOT been found.");
             }
+            List<String> matches = Searcher.existsMultiple(l, name);
+            if(matches.size() > 0) {
+            	System.out.println ("The word \""+name+"\" has been found.");
+            	for(String s : matches) {
+            		System.out.println(s);
+            	}
+            } else {
+            	System.out.println ("The word \""+name+"\" has NOT been found.");
+            }
+//            else if (Searcher.exists (l, name)) {
+//                System.out.println ("The word \""+name+"\" has been found.");
+//            } else {
+//            	System.out.println ("The word \""+name+"\" has NOT been found.");
+//            }
         }
     }
 }
