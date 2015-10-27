@@ -36,9 +36,9 @@ public class HashMapTest {
 		map.put("Andrew", "Jackson");
 		map.put("Martin", "Van Buren");
 		
-		Assert.assertTrue(map.contains("James"));
-		Assert.assertTrue(map.contains("Martin"));
-		Assert.assertFalse(map.contains("Jarl"));
+		Assert.assertTrue(map.containsKey("James"));
+		Assert.assertTrue(map.containsKey("Martin"));
+		Assert.assertFalse(map.containsKey("Jarl"));
 	}
 	
 	@Test

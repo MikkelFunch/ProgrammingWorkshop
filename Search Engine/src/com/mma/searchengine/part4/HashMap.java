@@ -43,7 +43,7 @@ public class HashMap<K, V> {
 		return null;
 	}
 	
-	public boolean contains(K key) {
+	public boolean containsKey(K key) {
 		if(get(key) == null) {
 			return false;
 		} else {
@@ -52,7 +52,7 @@ public class HashMap<K, V> {
 	}
 	
 	public void put(K key, V value) {
-		if(contains(key)) {
+		if(containsKey(key)) {
 			getEntry(key).setValue(value);
 		} else {
 			add(key, value);
