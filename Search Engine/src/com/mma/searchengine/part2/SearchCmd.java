@@ -23,8 +23,6 @@ class HTMLlist {
 // for them to be used.
 class Searcher {
 	
-	private static final String urlPrefix = "*PAGE:";
-
     // Checks if the string words occurs in HTMLlist l.
     // Recall that l represents a single item of the linked list, but points to
     // the remainder of the list.
@@ -91,15 +89,6 @@ class Searcher {
 
         return start;   // Return the first item in the list
     }
-    
-    /**
-	 * Checks if the given line is a URL
-	 * @param line The line to check
-	 * @return true if the line is an URL otherwise false
-	 */
-	public static boolean isURL(String line) {
-		return line.startsWith(urlPrefix);
-	}
 }
 
 public class SearchCmd {
