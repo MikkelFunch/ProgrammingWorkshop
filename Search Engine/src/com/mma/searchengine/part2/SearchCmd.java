@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import static com.mma.searchengine.util.URLUtil.*;
 
 // A (item of a) linked list of strings.
 class HTMLlist {    
@@ -22,8 +23,6 @@ class HTMLlist {
 // for them to be used.
 class Searcher {
 	
-	private static final String urlPrefix = "*PAGE:";
-
     // Checks if the string words occurs in HTMLlist l.
     // Recall that l represents a single item of the linked list, but points to
     // the remainder of the list.
@@ -43,16 +42,23 @@ class Searcher {
     
     public static void search(HTMLlist l, String word) {
     	boolean found = false;
+    	boolean currentUrlPrinted = false;
+    	String currentUrl = null;
     	
     	while(l != null) {
-    		// Check if the word is a URL and contains the word that is searched for
-    		if(l.str.startsWith(urlPrefix) && l.str.contains(word)) {
-    			System.out.println(l.str.substring(urlPrefix.length()));
-    			found = true;
+    		// Check if the word is a URL
+    		if(isURL(l.str)) {
+    			currentUrl = removeUrlPrefix(l.str);
+    			currentUrlPrinted = false;
     		} else if (l.str.equals(word)) {
-    			System.out.println("The word \""+word+"\" has been found.");
+    			if(!found) {
+    				System.out.println("The word \""+word+"\" has been found in the following link(s):");
+    			}
+    			if(!currentUrlPrinted) {
+    				System.out.println(currentUrl);
+    				currentUrlPrinted = true;
+    			}
     			found = true;
-    			break;
     		}
     		l = l.next;
     	}
