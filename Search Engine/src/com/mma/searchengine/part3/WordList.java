@@ -84,6 +84,7 @@ public class WordList {
 		currentLine = fileReader.readLine();
 		if(!isURL(currentLine)) {
 			// The first line is supposed to be an URL
+			System.err.println("Invalid input file");
 			System.exit(1);
 		}
 		currentUrl = removeUrlPrefix(currentLine);

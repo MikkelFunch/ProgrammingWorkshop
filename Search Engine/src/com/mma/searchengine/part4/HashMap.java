@@ -31,6 +31,7 @@ public class HashMap<K, V> {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	private Entry<K, V> getEntry(K key) {
 		int index = getIndex(key);
 		Entry<K, V> current = (Entry<K, V>) data[index];
@@ -64,6 +65,7 @@ public class HashMap<K, V> {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	private void expand() {
 		Object[] oldData = data;
 		data = new Object[data.length*EXPAND_FACTOR];
@@ -104,6 +106,7 @@ public class HashMap<K, V> {
 	 * such that they can be chained in case of index collision
 	 * @author Mark
 	 */
+	@SuppressWarnings("hiding")
 	public class Entry<K, V> {
 		private K key;
 		private V value;

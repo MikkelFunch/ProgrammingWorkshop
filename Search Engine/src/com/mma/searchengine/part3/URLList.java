@@ -26,4 +26,16 @@ public class URLList {
 	public URLList getNext() {
 		return next;
 	}
+	
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(url);
+		URLList currentList = getNext();
+		while(currentList != null) {
+			sb.append("\n");
+			sb.append(currentList.getUrl());
+			currentList = currentList.getNext();
+		}
+		return sb.toString();
+	}
 }
