@@ -18,23 +18,44 @@ class Searcher {
 	
 	// Search for word in the given list
 	public static void search(String word) {
-		//Get the hashset with the links containing the word
-		HashSet<String> result = map.get(word);
-		boolean found = false;
-		if(result != null) { //If there exist any links
-			found = true; //Word is found at least once
-			//Print the word is found
-			System.out.println("The word \""+word+"\" has been found on the following site(s):");
+		HashSet<String> result = new HashSet<String>();
+		if (word.contains(" AND ")) { //If the search should look for pages containing several words
+			//Words to look for
+			String word1 = word.substring(0, word.indexOf(" AND ")); 
+			String word2 = word.substring(word.indexOf(" AND ") + 5);
+			
+			//Links containing the words
+			HashSet<String> one = map.get(word1);
+			HashSet<String> two = map.get(word2);
+			
+			//The the links which is in both lists
+			for (String s : one) {
+				if (two.contains(s)) {
+					result.add(s);
+				}
+			}
+		} else if(word.contains(" OR ")){//If the search should look for pages containing either of the given words
+			//Words to look for
+			String word1 = word.substring(0, word.indexOf(" OR "));
+			String word2 = word.substring(word.indexOf(" OR ") + 4);
+			
+			//Concatenate the returned lists which contains the words
+			result = map.get(word1);
+			result.addAll(map.get(word2));
+		} else { //Just search for one word
+			result = map.get(word);
+		}
+		
+		if (!result.isEmpty()) { //If any links are found, print them
+			System.out.println("The word \""+word+"\" has been found on the following link(s):");
 			for(String s : result) { //Print all the urls which contain the word
 				System.out.println(s.substring(urlPrefix.length()));
 			}
-		}
-		if(!found) { //Word is not found
+		} else {//If no links are found
 			System.out.println("The word \""+word+"\" has NOT been found.");
 		}
     }
 	
-
     // Creates hashmap and set from a file.
     public static void readHtmlList(String filename) throws IOException {
     	// Open the file given as argument
