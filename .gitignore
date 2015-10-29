@@ -13,3 +13,9 @@ hs_err_pid*
 
 # mac folder options
 .DS_Store
+
+# Latex file
+*.aux
+*.log
+*.pdf
+*.synctex.gz
