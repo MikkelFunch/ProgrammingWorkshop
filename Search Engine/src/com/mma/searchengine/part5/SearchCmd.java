@@ -21,7 +21,7 @@ class Searcher {
 		HashSet<String> result = new HashSet<String>();
 		
 		int spaceIndex = word.indexOf(" ");
-		if (spaceIndex != -1) {
+		if (spaceIndex != -1) {//Check is there is a space
 			if (word.length() >= spaceIndex + 6 && word.substring(spaceIndex + 1, spaceIndex + 4).equals("AND")){ //If the search should look for pages containing several words
 				//Words to look for
 				String word1 = word.substring(0, word.indexOf(" AND ")); 
@@ -64,7 +64,7 @@ class Searcher {
 			} else {
 				System.out.println("Do not use spaces for anything other than searching for two words with \"AND\" or \"OR\"");
 			}
-		} else { //Just search for one word
+		} else { //Search for one word
 			result = map.get(word);
 		}
 		
