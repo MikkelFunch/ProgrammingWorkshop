@@ -12,7 +12,7 @@ import com.mma.searchengine.part4.HashMap;
 public class Benchmark {
 	
 	private static final int SETUP_ITERATIONS	= 1;
-	private static final int SEARCH_ITERATIONS	= 1;
+	private static final int SEARCH_ITERATIONS	= 10000;
 	
 	private static void testPart1(String filename, String searchWord) {
 		try {
