@@ -78,7 +78,6 @@ public class SearchCmd {
 			}
 			currentLine = fileReader.readLine();
 		}
-		
 		return map;
 	}
 }
