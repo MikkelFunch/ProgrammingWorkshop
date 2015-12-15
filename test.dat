@@ -1,0 +1,80 @@
+Part 1
+Data structure init time
+Times tested: 1
+Mean:            2759,60780 ms
+Max:             2759,60780 ms
+Min:             2759,60780 ms
+Variance:           0,00000 ms
+Std deviation:      0,00000 ms
+Search time
+Times tested: 1
+Mean:              28,67715 ms
+Max:               28,67715 ms
+Min:               28,67715 ms
+Variance:           0,00000 ms
+Std deviation:      0,00000 ms
+
+Part 2
+Data structure init time
+Times tested: 1
+Mean:            1320,43190 ms
+Max:             1320,43190 ms
+Min:             1320,43190 ms
+Variance:           0,00000 ms
+Std deviation:      0,00000 ms
+Search time
+Times tested: 1
+Mean:              25,85955 ms
+Max:               25,85955 ms
+Min:               25,85955 ms
+Variance:           0,00000 ms
+Std deviation:      0,00000 ms
+
+Part 3
+Data structure init time
+Times tested: 1
+Mean:          1203982,73606 ms
+Max:           1203982,73606 ms
+Min:           1203982,73606 ms
+Variance:           0,00000 ms
+Std deviation:      0,00000 ms
+Search time
+Times tested: 1
+Mean:               0,78495 ms
+Max:                0,78495 ms
+Min:                0,78495 ms
+Variance:           0,00000 ms
+Std deviation:      0,00000 ms
+
+Part 4
+Data structure init time
+Times tested: 1
+Mean:           38123,29171 ms
+Max:            38123,29171 ms
+Min:            38123,29171 ms
+Variance:           0,00000 ms
+Std deviation:      0,00000 ms
+Search time
+Times tested: 1
+Mean:               0,01116 ms
+Max:                0,01116 ms
+Min:                0,01116 ms
+Variance:           0,00000 ms
+Std deviation:      0,00000 ms
+
+Part 5
+Data structure init time
+Times tested: 1
+Mean:             647,43879 ms
+Max:              647,43879 ms
+Min:              647,43879 ms
+Variance:           0,00000 ms
+Std deviation:      0,00000 ms
+Search time
+Times tested: 1
+Mean:               0,02231 ms
+Max:                0,02231 ms
+Min:                0,02231 ms
+Variance:           0,00000 ms
+Std deviation:      0,00000 ms
+
