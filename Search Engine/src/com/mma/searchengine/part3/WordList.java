@@ -59,14 +59,29 @@ public class WordList {
 	 * @param line to add
 	 * @param url to add
 	 */
-	public void addLine(String line, String url) {
-		if(this.line.equals(line)) {
-			addUrl(url);
-			return;
-		} else if(next == null) {
-			 next = new WordList(line, url);
-		} else {
-			next.addLine(line, url);
+//	public void addLine(String line, String url) {
+//		if(this.line.equals(line)) {
+//			addUrl(url);
+//			return;
+//		} else if(next == null) {
+//			 next = new WordList(line, url);
+//		} else {
+//			next.addLine(line, url);
+//		}
+//	}
+	
+	public void addLine(String word, String url) {
+		WordList currentWord = this;
+		while(true) {
+			if (currentWord.line.equals(word)) {
+				currentWord.addUrl(url);
+				break;
+			} else if (currentWord.next == null) {
+				currentWord.next = new WordList(word, url);
+				break;
+			} else {
+				currentWord = currentWord.next;
+			}
 		}
 	}
 	

@@ -12,7 +12,7 @@ import com.mma.searchengine.part4.HashMap;
 public class Benchmark {
 	
 	private static final int SETUP_ITERATIONS	= 1;
-	private static final int SEARCH_ITERATIONS	= 1000;
+	private static final int SEARCH_ITERATIONS	= 1;
 	
 	private static void testPart1(String filename, String searchWord) {
 		try {
@@ -118,6 +118,31 @@ public class Benchmark {
 		}
 	}
 	
+	private static void testPart5(String filename, String searchWord) {
+		try {
+			long[] initTimes = new long[SETUP_ITERATIONS];
+			for(int i = 0; i < SETUP_ITERATIONS; i++) {
+				long beforeListInit = System.nanoTime();
+				com.mma.searchengine.part5.Searcher.readHtmlList(filename);
+				long listInitTime = System.nanoTime() - beforeListInit;
+				initTimes[i] = listInitTime;
+			}
+			
+			long[] searchTimes = new long[SEARCH_ITERATIONS]; 
+			for(int i = 0; i < SEARCH_ITERATIONS; i++) {
+				long beforeSearch = System.nanoTime();
+				com.mma.searchengine.part5.Searcher.exists(searchWord);
+				long searchTime = System.nanoTime() - beforeSearch;
+				searchTimes[i] = searchTime;
+			}
+			
+			printResults("Part 5", initTimes, searchTimes);
+		} catch(IOException e) {
+			System.out.println("testPart1 failed");
+			e.printStackTrace();
+		}
+	}
+	
 	public static void printResults(String name, long[] listInitTime, long[] searchTime) {
 		System.out.println(name);
 		printResult("Data structure init time", listInitTime);
@@ -150,6 +175,7 @@ public class Benchmark {
 		final double standardDeviation = Math.sqrt(variance);
 		
 		System.out.println(heading);
+		System.out.println("Times tested: " + arr.length);
 		System.out.println(format("Mean:          ", mean));
 		System.out.println(format("Max:           ", maxTime));
 		System.out.println(format("Min:           ", minTime));
@@ -172,12 +198,13 @@ public class Benchmark {
 	}
 
 	public static void main(String[] args) {
-		final String filename = "data/itcwww-medium.txt";
+		final String filename = "data/itcwww-big.txt";
 		final String searchWord = "på";
 		testPart1(filename, searchWord);
 		testPart2(filename, searchWord);
 		testPart3(filename, searchWord);
 		testPart4(filename, searchWord);
+		testPart5(filename, searchWord);
 	}
 	
 	

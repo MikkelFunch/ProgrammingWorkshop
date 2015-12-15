@@ -99,4 +99,12 @@ public class Searcher {
      }
      infile.close(); // Close the file
  }
+ 
+ public static boolean exists(String word){
+ 	if (map.get(word) != null) {
+			return true;
+		} else {
+			return false;
+		}
+ }
 }
