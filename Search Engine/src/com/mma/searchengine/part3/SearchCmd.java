@@ -9,6 +9,16 @@ import java.io.InputStreamReader;
 
 public class SearchCmd {
 	
+	public static boolean exists(WordList list, String word) {
+		while(list != null) {
+    		if(!isURL(list.getLine()) && word.equals(list.getLine())) {
+    			return true;
+    		}
+    		list = list.getNext();
+    	}
+    	return false;
+	}
+	
 	public static void search(WordList list, String word) {
     	while(list != null) {
     		if(!isURL(list.getLine()) && word.equals(list.getLine())) {
