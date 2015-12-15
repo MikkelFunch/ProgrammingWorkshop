@@ -9,6 +9,9 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.charset.spi.CharsetProvider;
 
+import com.mma.searchengine.part3.URLList;
+import com.mma.searchengine.part4.HashMap;
+
 import sun.awt.CharsetString;
 
 public class Benchmark {
@@ -94,6 +97,32 @@ public class Benchmark {
 		}
 	}
 	
+	private static void testPart4(String filename, String searchWord) {
+		try {
+			long[] initTimes = new long[SETUP_ITERATIONS];
+			HashMap<String, URLList> wordList = null;
+			for(int i = 0; i < SETUP_ITERATIONS; i++) {
+				long beforeListInit = System.nanoTime();
+				wordList = com.mma.searchengine.part4.SearchCmd.constructHashMap(new BufferedReader(new InputStreamReader(new FileInputStream(filename), StandardCharsets.UTF_8)));
+				long listInitTime = System.nanoTime() - beforeListInit;
+				initTimes[i] = listInitTime;
+			}
+			
+			long[] searchTimes = new long[SEARCH_ITERATIONS]; 
+			for(int i = 0; i < SEARCH_ITERATIONS; i++) {
+				long beforeSearch = System.nanoTime();
+				com.mma.searchengine.part4.SearchCmd.exists(wordList, searchWord);
+				long searchTime = System.nanoTime() - beforeSearch;
+				searchTimes[i] = searchTime;
+			}
+			
+			printResults("Part 4", initTimes, searchTimes);
+		} catch(IOException e) {
+			System.out.println("testPart1 failed");
+			e.printStackTrace();
+		}
+	}
+	
 	public static void printResults(String name, long[] listInitTime, long[] searchTime) {
 		System.out.println(name);
 		printResult("Data structure init time", listInitTime);
@@ -153,6 +182,7 @@ public class Benchmark {
 		testPart1(filename, searchWord);
 		testPart2(filename, searchWord);
 		testPart3(filename, searchWord);
+		testPart4(filename, searchWord);
 	}
 	
 	

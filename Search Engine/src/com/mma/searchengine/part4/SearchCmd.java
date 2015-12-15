@@ -13,6 +13,10 @@ import com.mma.searchengine.part3.WordList;
 
 public class SearchCmd {
 	
+	public static boolean exists(HashMap<String, URLList> map, String word) {
+		return map.containsKey(word);
+	}
+	
 	public static void search(HashMap<String, URLList> map, String word) {
 		if(!map.containsKey(word)) {
 			System.out.println("The word \""+word+"\" has NOT been found");
