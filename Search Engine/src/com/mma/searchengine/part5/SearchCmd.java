@@ -31,10 +31,14 @@ class Searcher {
 				HashSet<String> one = map.get(word1);
 				HashSet<String> two = map.get(word2);
 				
-				//The the links which is in both lists
-				for (String s : one) {
-					if (two.contains(s)) {
-						result.add(s);
+				if(one == null || two == null){
+					result = null;
+				} else {
+					//Add the links which is in both lists
+					for (String s : one) {
+						if (two.contains(s)) {
+							result.add(s);
+						}
 					}
 				}
 			} else if (word.length() >= spaceIndex + 5 && word.substring(spaceIndex + 1, spaceIndex + 3).equals("OR")){ //If the search should look for pages containing either of the given words
@@ -42,9 +46,21 @@ class Searcher {
 				String word1 = word.substring(0, word.indexOf(" OR "));
 				String word2 = word.substring(word.indexOf(" OR ") + 4);
 				
-				//Concatenate the returned lists which contains the words
-				result = map.get(word1);
-				result.addAll(map.get(word2));
+				//Links containing the words
+				HashSet<String> one = map.get(word1);
+				HashSet<String> two = map.get(word2);
+				
+				if (one == null && two == null) { //Check if both or either words is not found
+					result = null;
+				} else if (one == null){
+					result = two;
+				} else if (two == null){
+					result = one;
+				} else {
+					//Concatenate the returned lists which contains the words
+					result = map.get(word1);
+					result.addAll(map.get(word2));
+				}
 			} else {
 				System.out.println("Do not use spaces for anything other than searching for two words with \"AND\" or \"OR\"");
 			}
@@ -58,7 +74,7 @@ class Searcher {
 				System.out.println(s.substring(urlPrefix.length()));
 			}
 		} else {//If no links are found
-			System.out.println("The word \""+word+"\" has NOT been found.");
+			System.out.println("The word/s \""+word+"\" has NOT been found.");
 		}
     }
 	
