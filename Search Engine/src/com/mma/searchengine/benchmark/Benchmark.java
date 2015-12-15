@@ -2,22 +2,17 @@ package com.mma.searchengine.benchmark;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import java.nio.charset.spi.CharsetProvider;
 
 import com.mma.searchengine.part3.URLList;
 import com.mma.searchengine.part4.HashMap;
 
-import sun.awt.CharsetString;
-
 public class Benchmark {
 	
-	private static final int SETUP_ITERATIONS	= 1000;
-	private static final int SEARCH_ITERATIONS	= 10000;
+	private static final int SETUP_ITERATIONS	= 1;
+	private static final int SEARCH_ITERATIONS	= 1000;
 	
 	private static void testPart1(String filename, String searchWord) {
 		try {
@@ -177,7 +172,7 @@ public class Benchmark {
 	}
 
 	public static void main(String[] args) {
-		final String filename = "data/itcwww-small.txt";
+		final String filename = "data/itcwww-medium.txt";
 		final String searchWord = "på";
 		testPart1(filename, searchWord);
 		testPart2(filename, searchWord);
