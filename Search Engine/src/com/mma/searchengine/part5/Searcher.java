@@ -3,7 +3,7 @@ package com.mma.searchengine.part5;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.HashMap;
+import com.mma.searchengine.part4.*;
 import java.util.HashSet;
 
 //Contains the main functionality of the program.

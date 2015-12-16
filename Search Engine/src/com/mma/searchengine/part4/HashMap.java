@@ -12,13 +12,13 @@ public class HashMap<K, V> {
 	// The factor which the array should be expanded with when it exceeds its capacity
 	private static final int EXPAND_FACTOR = 2;
 	// The number of entries allowed for each array cell before the array is expanded
-	private static final double ENTRIES_PER_CELL = 0.75;
+	private static final double ENTRIES_PER_CELL = 0.5;
 	
-	Object[] data;
-	int size;
+	private Entry<K, V>[] data;
+	private int size;
 	
 	public HashMap() {
-		data = new Object[2];
+		data = new Entry[2];
 		size = 0;
 	}
 	
@@ -67,8 +67,8 @@ public class HashMap<K, V> {
 	
 	@SuppressWarnings("unchecked")
 	private void expand() {
-		Object[] oldData = data;
-		data = new Object[data.length*EXPAND_FACTOR];
+		Entry<K, V>[] oldData = data;
+		data = new Entry[data.length*EXPAND_FACTOR];
 		
 		// Move all data from the previous array to the new array.
 		for(int i = 0; i < oldData.length; i++) {
@@ -99,6 +99,10 @@ public class HashMap<K, V> {
 			index = index * -1;
 		}
 		return index;
+	}
+	
+	public int size() {
+		return size;
 	}
 	
 	/***

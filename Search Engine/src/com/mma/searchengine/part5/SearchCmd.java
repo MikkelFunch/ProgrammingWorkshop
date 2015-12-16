@@ -16,7 +16,7 @@ public class SearchCmd {
 
         // Read the file and create create the hashmap and set
         Searcher.readHtmlList(args[0]);
-
+        
         // Start reading input from the user
         BufferedReader inuser = new BufferedReader(new InputStreamReader(System.in));
 
