@@ -6,20 +6,23 @@ import java.security.NoSuchAlgorithmException;
 
 public class WString {
 	
-	private String s;
-	
 	public WString(String s) {
 		this.s = s;
 	}
 	
-	@Override
-	public int hashCode() {
-		MessageDigest md = null;
+	private static MessageDigest md;
+	private String s;
+	
+	static {
 		try {
 			md = MessageDigest.getInstance("SHA-256");
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public int hashCode() {
 		md.update(s.getBytes());
 		byte[] bytes = md.digest();
 		String str = new String(bytes, StandardCharsets.UTF_8);
